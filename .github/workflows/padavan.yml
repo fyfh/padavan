@@ -27,6 +27,8 @@ jobs:
         mkdir /opt/images/
     - name: Clear And Build              
       run: |
+        rm -rf /opt/rt-n56u/trunk/.config
+        mv $GITHUB_WORKSPACE/.config /opt/rt-n56u/trunk/.config
         mv $GITHUB_WORKSPACE/board.h /opt/rt-n56u/trunk/configs/boards/RT-AC54U/board.h
         mv $GITHUB_WORKSPACE/kernel-3.4.x.config /opt/rt-n56u/trunk/configs/boards/RT-AC54U/kernel-3.4.x.config
         mv $GITHUB_WORKSPACE/board.mk /opt/rt-n56u/trunk/configs/boards/RT-AC54U/board.mk
