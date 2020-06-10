@@ -18,7 +18,7 @@ jobs:
         sudo apt-get install autoconf automake autopoint bison build-essential flex gawk gettext git gperf libtool pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev texinfo python-docutils
     - name: Clone Code                 
       run: |
-        git clone --depth=1 https://bitbucket.org/padavan/rt-n56u.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
     - name: Build Tool Chain           
       run: |
         cd /opt/rt-n56u/toolchain-mipsel
@@ -28,11 +28,7 @@ jobs:
     - name: Clear And Build              
       run: |
         rm -rf /opt/rt-n56u/trunk/.config
-        mv $GITHUB_WORKSPACE/.config /opt/rt-n56u/trunk/.config
-        mv $GITHUB_WORKSPACE/board.h /opt/rt-n56u/trunk/configs/boards/RT-AC54U/board.h
-        mv $GITHUB_WORKSPACE/kernel-3.4.x.config /opt/rt-n56u/trunk/configs/boards/RT-AC54U/kernel-3.4.x.config
-        mv $GITHUB_WORKSPACE/board.mk /opt/rt-n56u/trunk/configs/boards/RT-AC54U/board.mk
-        mv $GITHUB_WORKSPACE/defaults.h /opt/rt-n56u/trunk/user/shared/defaults.h
+        mv /opt/rt-n56u/trunk/configs/templates/PSG1218.config /opt/rt-n56u/trunk/.config
         mv $GITHUB_WORKSPACE/MT7620_AP_2T2R-4L_external_LNA_external_PA_V15.bin /opt/rt-n56u/trunk/vendors/Ralink/MT7620/MT7620_AP_2T2R-4L_external_LNA_external_PA_V15.bin
         cd /opt/rt-n56u/trunk
         sudo ./clear_tree
