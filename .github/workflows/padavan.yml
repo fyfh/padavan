@@ -18,7 +18,7 @@ jobs:
         sudo apt-get install autoconf automake autopoint bison build-essential flex gawk gettext git gperf libtool pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev texinfo python-docutils
     - name: Clone Code                 
       run: |
-        git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
+        git clone --depth=1 https://bitbucket.org/padavan/rt-n56u.git /opt/rt-n56u
     - name: Build Tool Chain           
       run: |
         cd /opt/rt-n56u/toolchain-mipsel
