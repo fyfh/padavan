@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-18.04
     if: github.event.repository.owner.id == github.event.sender.id  
     steps:
     - name: Checkout Master            
@@ -16,6 +16,10 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install autoconf automake autopoint bison build-essential flex gawk gettext git gperf libtool pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev texinfo python-docutils
+        sudo apt-get install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
+        cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
+        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget \
+        module-init-tools
     - name: Clone Code                 
       run: |
         git clone --depth=1 https://bitbucket.org/padavan/rt-n56u.git /opt/rt-n56u
