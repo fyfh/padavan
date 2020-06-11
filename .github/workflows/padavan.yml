@@ -22,6 +22,7 @@ jobs:
     - name: Build Tool Chain           
       run: |
         cd /opt/rt-n56u/toolchain-mipsel
+        sudo ./clean_sources
         sh dl_toolchain.sh
         mkdir /opt/images/
     - name: Clear And Build              
