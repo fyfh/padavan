@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id  
     steps:
     - name: Checkout Master            
@@ -23,7 +23,6 @@ jobs:
       run: |
         cd /opt/rt-n56u/toolchain-mipsel
         sudo ./clean_sources
-        sudo ./clean_toolchain
         sudo ./build_toolchain
         mkdir /opt/images/
     - name: Clear And Build              
