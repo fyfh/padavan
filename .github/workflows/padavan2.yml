@@ -30,7 +30,7 @@ jobs:
     - name: Clear And Build              
       run: |
         rm -rf /opt/rt-n56u/trunk/.config
-        mv /opt/rt-n56u/trunk/configs/templates/PSG1218.config /opt/rt-n56u/trunk/.config
+        cp /opt/rt-n56u/trunk/configs/templates/PSG1218.config /opt/rt-n56u/trunk/.config
         mv $GITHUB_WORKSPACE/MT7620_AP_2T2R-4L_external_LNA_external_PA_V15.bin /opt/rt-n56u/trunk/vendors/Ralink/MT7620/MT7620_AP_2T2R-4L_external_LNA_external_PA_V15.bin
         cd /opt/rt-n56u/trunk
         ./clear_tree
