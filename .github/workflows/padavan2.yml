@@ -1,0 +1,44 @@
+name: Padavan CI PSG1218
+on:              
+  watch:                          
+    types: [started]                 
+
+jobs:
+  build:
+    runs-on: ubuntu-16.04
+    if: github.event.repository.owner.id == github.event.sender.id  
+    steps:
+    - name: Checkout Master            
+      uses: actions/checkout@master
+    - name: Initialization Environment 
+      env:
+        DEBIAN_FRONTEND: noninteractive  
+      run: |
+        sudo apt-get update
+        sudo apt install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
+        cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
+        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget \
+        module-init-tools
+    - name: Clone Code                 
+      run: |
+        git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
+    - name: Build Tool Chain           
+      run: |
+        cd /opt/rt-n56u/toolchain-mipsel
+        sh dl_toolchain.sh
+        mkdir /opt/images/
+    - name: Clear And Build              
+      run: |
+        rm -rf /opt/rt-n56u/trunk/.config
+        mv /opt/rt-n56u/trunk/configs/templates/PSG1218.config /opt/rt-n56u/trunk/.config
+        mv $GITHUB_WORKSPACE/MT7620_AP_2T2R-4L_external_LNA_external_PA_V15.bin /opt/rt-n56u/trunk/vendors/Ralink/MT7620/MT7620_AP_2T2R-4L_external_LNA_external_PA_V15.bin
+        cd /opt/rt-n56u/trunk
+        ./clear_tree
+        fakeroot ./build_firmware_modify PSG1218
+        sudo mv -f images/*.trx /opt/images/       
+    - name : Upload packages
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: Padavan-packages
+        path: /opt/images
